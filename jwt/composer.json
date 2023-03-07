@@ -1,0 +1,7 @@
+{
+    "name": "nathan/jwt",
+    "require": {
+        "laminas/laminas-config": "^3.8",
+        "firebase/php-jwt": "^6.4"
+    }
+}
