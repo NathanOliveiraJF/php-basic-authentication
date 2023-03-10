@@ -1,18 +1,24 @@
 <?php
+  $error = $_REQUEST["error"];
+?>
 
-require __DIR__ . '/../jwt/vendor/autoload.php';
+<html>
+  <head>
+    <title>login</title>
+  </head>
+  <body>
+    <h1>Login de usuario</h1>
+    <?php
+      if($error) {
+        echo "<p>Login inválido</p>";
+      }
+    ?>
+    <form action="authenticate.php" method="post">
+      <input placeholder="usuario"  name="usuario"/>
+      <input type="password" placeholder="senha"  name="senha"/>
+      <input type="submit" value="enviar"/>
+    </form>
+    <p>usuario: qualquer um, senha: 123</p>
+  </body>
 
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
-
-$key = 'chave-de-exemplo'; // chave que seria a forma de assinar o token, garantindo que as info do payload n foram alteradas
-$payload = [
-  "sub" => "123456789", // claim reserverd -> de quem pertende o token(id do user)
-  "name" => "Nathan", // claim public -> informações do usuário autenticado na aplicação
-  "role" => "admin" // cliam public -> info do usuário autenticado na aplicação
-];
-
-$token = JWT::encode($payload, $key, 'HS256');
-$decoded = JWT::decode($token, new Key($key,'HS256'));
-
-print_r($token);
+</html>
